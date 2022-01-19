@@ -68,6 +68,9 @@ class PrepareProductForExport(models.TransientModel):
                     templates_val.append(val)
                     position = 1
 
+            if not templates_val:
+                raise UserError(
+                    _("No data found to be exported.\n\nPossible Reasons:\n - SKU(s) are not set properly."))
             # Based on customer's selected file format apply to call method
             method_name = "_export_{}".format(self.export_method)
             if hasattr(self, method_name):

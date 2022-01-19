@@ -342,7 +342,7 @@ class WooCouponEpt(models.Model):
                 results += self.woo_import_all_coupons(wc_api, page, common_log_book_id, model_id)
         if not results:
             _logger.info("Coupons data not found from woo")
-            return True
+            return False
         coupon_queue = self.create_woo_coupon_data_queue(instance, results)
 
         return coupon_queue
